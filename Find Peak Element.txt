@@ -1,0 +1,41 @@
+/*
+A peak element is an element that is strictly greater than its neighbors.
+Given an integer array nums, find a peak element, and return its index. If the array contains multiple peaks, return the index to any of the peaks.
+You may imagine that nums[-1] = nums[n] = -8.
+You must write an algorithm that runs in O(log n) time.
+*/
+
+#include<iostream>
+using namespace std;
+
+int peakelement(int arr[],int n){
+	int low=0,high=n-1;
+	if(arr[0]>arr[1])
+		 return arr[0];
+	else if(arr[n-1]>arr[n-2])
+		 return arr[n-1];
+	while(low<=high){
+		int mid=low+(high-low)/2;
+		if(arr[mid]>arr[mid+1]&&arr[mid]>arr[mid-1])
+		   return arr[mid];
+		else if(arr[mid]<arr[mid-1])
+		   high=mid-1;
+		else 
+		   low=mid+1;
+	}
+	return -1;
+}
+
+int main(){
+	int n,arr[100];
+	cout<<"Enter the size of the array"<<endl;
+	cin>>n;
+
+	cout<<"Enter the elements in the array"<<endl;
+	for(int i=0;i<n;i++){
+       cin>>arr[i];
+	}
+
+	int max=peakelement(arr,n);
+	cout<<max;
+}
